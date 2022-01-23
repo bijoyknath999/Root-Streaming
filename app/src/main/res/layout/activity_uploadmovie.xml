@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".UploadMovie"
+    android:gravity="center_vertical">
+
+
+    <EditText
+        android:id="@+id/et_video_name"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_margin="10dp"
+        android:autoText="true"
+        android:padding="15dp"
+        android:background="@drawable/et_custom"
+        android:hint="Enter the Video name"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_img_link"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_margin="10dp"
+        android:autoText="true"
+        android:padding="15dp"
+        android:background="@drawable/et_custom"
+        android:hint="Enter the Image link"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/et_video_link"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_margin="10dp"
+        android:autoText="true"
+        android:padding="15dp"
+        android:background="@drawable/et_custom"
+        android:hint="Enter the Video link"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_api_key"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_margin="10dp"
+        android:autoText="true"
+        android:padding="15dp"
+        android:background="@drawable/et_custom"
+        android:hint="Enter the APi Key"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+
+    <Button
+        android:id="@+id/button_upload_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_custom"
+        android:text="upload"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+</LinearLayout>
