@@ -230,11 +230,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setNeutralButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent edit = new Intent(MainActivity.this,UploadMovie.class);
-                edit.putExtra("name",name);
-                edit.putExtra("edit",true);
-                edit.putExtra("id",id);
-                startActivity(edit);
+                showdialog2(name, id);
             }
         });
 
@@ -250,6 +246,39 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void showdialog2(String name, String id) {
+        builder = new AlertDialog.Builder(MainActivity.this);
+        ViewGroup viewGroup = ((Activity) MainActivity.this).findViewById(android.R.id.content);
+
+        View dialogView = LayoutInflater.from(MainActivity.this).inflate(R.layout.lock, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        EditText password = dialogView.findViewById(R.id.upload_password);
+        Button Click = dialogView.findViewById(R.id.upload_enter);
+
+        Click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (password.getText().toString().equals("12344"))
+                {
+                    alertDialog.dismiss();
+                    Intent edit = new Intent(MainActivity.this,UploadMovie.class);
+                    edit.putExtra("name",name);
+                    edit.putExtra("edit",true);
+                    edit.putExtra("id",id);
+                    startActivity(edit);
+                }
+                else
+                {
+                    alertDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Please enter correct password!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 
     /*
