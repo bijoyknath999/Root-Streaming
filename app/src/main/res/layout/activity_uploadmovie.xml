@@ -8,16 +8,17 @@
     android:background="@color/black"
     android:orientation="vertical"
     tools:context=".UploadMovie"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:id="@+id/upload_layout">
 
 
     <EditText
         android:id="@+id/et_video_name"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:autoText="true"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="@drawable/et_custom"
         android:hint="Enter the Video name"
         android:textColor="@android:color/white"
@@ -27,10 +28,10 @@
     <EditText
         android:id="@+id/et_img_link"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:autoText="true"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="@drawable/et_custom"
         android:hint="Enter the Image link"
         android:textColor="@android:color/white"
@@ -41,10 +42,10 @@
     <EditText
         android:id="@+id/et_video_link"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:autoText="true"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="@drawable/et_custom"
         android:hint="Enter the Video link"
         android:textColor="@android:color/white"
@@ -54,10 +55,10 @@
     <EditText
         android:id="@+id/et_api_key"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:autoText="true"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="@drawable/et_custom"
         android:hint="Enter the APi Key"
         android:textColor="@android:color/white"

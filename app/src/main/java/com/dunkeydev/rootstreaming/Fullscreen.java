@@ -116,14 +116,7 @@ public class Fullscreen extends AppCompatActivity {
         player.setPlayWhenReady(false);
         playerView.setRewindIncrementMs(10000);
         playerView.setFastForwardIncrementMs(10000);
-        if (player.isPlaying())
-        {
-            playerView.setKeepScreenOn(true);
-        }
-        else
-        {
-            playerView.setKeepScreenOn(false);
-        }
+        playerView.setKeepScreenOn(true);
 
     }
 
@@ -132,7 +125,7 @@ public class Fullscreen extends AppCompatActivity {
 
 
         DataSource.Factory datasourcefactory =
-                new DefaultHttpDataSourceFactory("video");
+                new DefaultHttpDataSourceFactory(Util.getUserAgent(this, "player"));
         return  new ProgressiveMediaSource.Factory(datasourcefactory)
                 .createMediaSource(uri);
     }

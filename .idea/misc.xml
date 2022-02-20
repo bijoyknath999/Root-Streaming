@@ -16,9 +16,20 @@
         <entry key="../../../Downloads/Firebase.video.streaming.app-master/app/src/main/res/layout/exoplayer_custom_controls.xml" value="0.19895833333333332" />
         <entry key="../../../Downloads/Firebase.video.streaming.app-master/app/src/main/res/layout/item.xml" value="0.19895833333333332" />
         <entry key="../../../Downloads/Firebase.video.streaming.app-master/app/src/main/res/menu/options_menu.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/drawable/edittext.xml" value="0.185" />
+        <entry key="app/src/main/res/drawable/ic_info.xml" value="0.2655" />
+        <entry key="app/src/main/res/drawable/ic_progress_circle.xml" value="0.2655" />
+        <entry key="app/src/main/res/layout/activity_edit_details.xml" value="0.153125" />
         <entry key="app/src/main/res/layout/activity_fullscreen.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26403985507246375" />
         <entry key="app/src/main/res/layout/activity_uploadmovie.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/activity_web_google_colab.xml" value="0.26403985507246375" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.26403985507246375" />
+        <entry key="app/src/main/res/layout/custom_snackbar.xml" value="0.26403985507246375" />
         <entry key="app/src/main/res/layout/item.xml" value="0.16945288753799392" />
+        <entry key="app/src/main/res/layout/lock.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/progressbar_circle.xml" value="0.26403985507246375" />
+        <entry key="app/src/main/res/layout/track_selection_dialog.xml" value="0.2916666666666667" />
       </map>
     </option>
   </component>

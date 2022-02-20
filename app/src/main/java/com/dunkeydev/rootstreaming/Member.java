@@ -5,6 +5,7 @@ public class Member {
     private String Videourl;
     private String search;
     private String imgurl;
+    private String id;
 
     public Member(){}
 
@@ -38,6 +39,14 @@ public class Member {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 

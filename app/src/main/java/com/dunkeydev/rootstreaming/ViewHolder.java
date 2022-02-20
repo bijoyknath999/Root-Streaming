@@ -28,8 +28,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    SimpleExoPlayer exoPlayer;
-    PlayerView playerView;
 
     public ViewHolder(@NonNull View itemView) {
 

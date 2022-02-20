@@ -7,15 +7,20 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     String name,url;
     FirebaseUser currentUser;//used to store current user of account
     FirebaseAuth mAuth;//Used for firebase authentication
+    private AlertDialog.Builder builder;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerview_ShowVideo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,true);
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
         databaseReference = database.getReference("video");
 
 
@@ -88,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onItemLongClick(View view, int position) {
 
                                 name = getItem(position).getName();
-                                showDeleteDialog(name);
+                                showDeleteDialog(name, getItem(position).getId());
+
+
                             }
                         });
                     }
@@ -146,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onItemLongClick(View view, int position) {
 
                                 name = getItem(position).getName();
-                                showDeleteDialog(name);
+                                showDeleteDialog(name,getItem(position).getId());
                             }
                         });
                     }
@@ -189,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showDeleteDialog(String name){
+    private void showDeleteDialog(String name, String id){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Delete");
         builder.setMessage("Are you Sure to Delete this data");
@@ -201,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
 
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                             dataSnapshot1.getRef().removeValue();
@@ -214,6 +224,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        builder.setNeutralButton("Edit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent edit = new Intent(MainActivity.this,UploadMovie.class);
+                edit.putExtra("name",name);
+                edit.putExtra("edit",true);
+                edit.putExtra("id",id);
+                startActivity(edit);
             }
         });
 
@@ -244,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 feedbackItemClicked();
                 break;
             case R.id.uploadmovieItem:
-                updatemovieClicked();
+                showdialog();
                 break;
             case R.id.logoutItem:
                 logoutItemClick();
@@ -299,6 +320,37 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, UploadMovie.class);
         startActivity(intent);
 
+    }
+
+    private void showdialog()
+    {
+        builder = new AlertDialog.Builder(MainActivity.this);
+        ViewGroup viewGroup = ((Activity) MainActivity.this).findViewById(android.R.id.content);
+
+        View dialogView = LayoutInflater.from(MainActivity.this).inflate(R.layout.lock, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        EditText password = dialogView.findViewById(R.id.upload_password);
+        Button Click = dialogView.findViewById(R.id.upload_enter);
+
+        Click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (password.getText().toString().equals("12344"))
+                {
+                    alertDialog.dismiss();
+                    updatemovieClicked();
+                }
+                else
+                {
+                    alertDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Please enter correct password!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }
