@@ -13,8 +13,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
@@ -41,6 +43,7 @@ public class Fullscreen extends AppCompatActivity {
     private boolean playwhenready = false;
     private  int currentWindow = 0;
     private  long playbackposition = 0;
+    private CustomDialog customDialog;
 
 
     @Override
@@ -59,6 +62,7 @@ public class Fullscreen extends AppCompatActivity {
         playerView = findViewById(R.id.exoplayer_fullscreen);
         textView = findViewById(R.id.tv_fullscreen);
 
+        customDialog = new CustomDialog(Fullscreen.this);
 
         fullscreenButton = playerView.findViewById(R.id.exoplayer_fullscreen_icon);
 
@@ -118,6 +122,25 @@ public class Fullscreen extends AppCompatActivity {
         playerView.setFastForwardIncrementMs(10000);
         playerView.setKeepScreenOn(true);
 
+
+
+        player.addListener(new Player.EventListener() {
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                Player.EventListener.super.onPlayerStateChanged(playWhenReady, playbackState);
+
+                if (playbackState == Player.STATE_READY)
+                {
+                    customDialog.DismissDialog();
+
+                }
+                else if (playbackState == Player.STATE_BUFFERING)
+                {
+                    customDialog.ShowDialog();
+                }
+            }
+        });
+
     }
 
 
@@ -134,8 +157,7 @@ public class Fullscreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
+        customDialog.ShowDialog();
     }
 
     @Override
