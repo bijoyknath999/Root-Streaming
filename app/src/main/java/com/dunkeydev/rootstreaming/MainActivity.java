@@ -206,23 +206,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                Query query = databaseReference.orderByChild("name").equalTo(name);
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                            dataSnapshot1.getRef().removeValue();
-                        }
-                        Toast.makeText(MainActivity.this, "Video Deleted", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        ///
-                    }
-                });
+                showdialog3(name,id);
 
             }
         });
@@ -270,6 +254,52 @@ public class MainActivity extends AppCompatActivity {
                     edit.putExtra("edit",true);
                     edit.putExtra("id",id);
                     startActivity(edit);
+                }
+                else
+                {
+                    alertDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Please enter correct password!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void showdialog3(String name, String id) {
+        builder = new AlertDialog.Builder(MainActivity.this);
+        ViewGroup viewGroup = ((Activity) MainActivity.this).findViewById(android.R.id.content);
+
+        View dialogView = LayoutInflater.from(MainActivity.this).inflate(R.layout.lock, viewGroup, false);
+        builder.setView(dialogView);
+        alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        EditText password = dialogView.findViewById(R.id.upload_password);
+        Button Click = dialogView.findViewById(R.id.upload_enter);
+
+        Click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (password.getText().toString().equals("12344"))
+                {
+                    alertDialog.dismiss();
+                    Query query = databaseReference.orderByChild("name").equalTo(name);
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                dataSnapshot1.getRef().removeValue();
+                            }
+                            Toast.makeText(MainActivity.this, "Video Deleted", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            ///
+                        }
+                    });
                 }
                 else
                 {
