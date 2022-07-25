@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
@@ -44,6 +47,10 @@ public class Fullscreen extends AppCompatActivity {
     private  int currentWindow = 0;
     private  long playbackposition = 0;
     private CustomDialog customDialog;
+    private DefaultTrackSelector trackSelector;
+    private boolean isShowingTrackSelectionDialog;
+    private DefaultTrackSelector.Parameters trackSelectorParameters;
+    private ImageButton button;
 
 
     @Override
@@ -65,6 +72,8 @@ public class Fullscreen extends AppCompatActivity {
         customDialog = new CustomDialog(Fullscreen.this);
 
         fullscreenButton = playerView.findViewById(R.id.exoplayer_fullscreen_icon);
+        button = findViewById(R.id.exo_track_selection_view_btn);
+        trackSelector = new DefaultTrackSelector();
 
 
         Intent intent = getIntent();
@@ -110,7 +119,6 @@ public class Fullscreen extends AppCompatActivity {
                 }
             }
         });
-
         player = ExoPlayerFactory.newSimpleInstance(this);
         playerView.setPlayer(player);
         Uri uri = Uri.parse(url);
@@ -140,6 +148,21 @@ public class Fullscreen extends AppCompatActivity {
                 }
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MappingTrackSelector.MappedTrackInfo mappedTrackInfo = trackSelector.getCurrentMappedTrackInfo();
+                if (mappedTrackInfo != null) {
+                    if (!isShowingTrackSelectionDialog && TrackSelectionDialog.willHaveContent(trackSelector)) {
+                        isShowingTrackSelectionDialog = true;
+                        TrackSelectionDialog trackSelectionDialog = TrackSelectionDialog.createForTrackSelector(trackSelector,/* onDismissListener= */ dismissedDialog -> isShowingTrackSelectionDialog = false);
+                        trackSelectionDialog.show(getSupportFragmentManager(), /* tag= */ null);
+                    }
+                }
+            }
+        });
+
 
     }
 
